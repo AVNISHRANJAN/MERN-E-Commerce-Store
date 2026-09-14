@@ -29,7 +29,7 @@ const Shop = () => {
     if (!categoriesQuery.isLoading) {
       dispatch(setCategories(categoriesQuery.data));
     }
-  }, [categoriesQuery.data, dispatch]);
+  }, [categoriesQuery.data, categoriesQuery.isLoading, dispatch]);
 
   useEffect(() => {
     if (!checked.length || !radio.length) {
@@ -48,7 +48,14 @@ const Shop = () => {
         dispatch(setProducts(filteredProducts));
       }
     }
-  }, [checked, radio, filteredProductsQuery.data, dispatch, priceFilter]);
+  }, [
+    checked,
+    radio,
+    filteredProductsQuery.data,
+    filteredProductsQuery.isLoading,
+    dispatch,
+    priceFilter,
+  ]);
 
   const handleBrandClick = (brand) => {
     const productsByBrand = filteredProductsQuery.data?.filter(

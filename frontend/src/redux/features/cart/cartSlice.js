@@ -10,7 +10,11 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const { user, rating, numReviews, reviews, ...item } = action.payload;
+      const item = { ...action.payload };
+      delete item.user;
+      delete item.rating;
+      delete item.numReviews;
+      delete item.reviews;
       const existItem = state.cartItems.find((x) => x._id === item._id);
 
       if (existItem) {
@@ -38,12 +42,12 @@ const cartSlice = createSlice({
       localStorage.setItem("cart", JSON.stringify(state));
     },
 
-    clearCartItems: (state, action) => {
+    clearCartItems: (state) => {
       state.cartItems = [];
       localStorage.setItem("cart", JSON.stringify(state));
     },
 
-    resetCart: (state) => (state = initialState),
+    resetCart: () => initialState,
   },
 });
 

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { FaHeart, FaRegHeart, FaVaadin } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addToFavorites,
@@ -21,7 +21,7 @@ const HeartIcon = ({ product }) => {
   useEffect(() => {
     const favoritesFromLocalStorage = getFavoritesFromLocalStorage();
     dispatch(setFavorites(favoritesFromLocalStorage));
-  }, []);
+  }, [dispatch]);
 
   const toggleFavorites = () => {
     if (isFavorite) {
